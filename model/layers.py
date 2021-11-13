@@ -10,7 +10,7 @@ from keras.layers import Input
 def Conv(filters, kernel_size, block_name):
     def result(input):
         conv = Conv2D(filters, kernel_size, padding="same", name=block_name)(input)
-        relu  = Activation('relu')(conv)
+        relu = Activation('relu')(conv)
         pool = MaxPooling2D(pool_size=(2, 2))(relu)
         return pool
     return result
@@ -20,8 +20,8 @@ def FC(num_classes):
         flatten = Flatten(name='flat')(input)
         dropout = Dropout(0.5, name='drop')(flatten)
         dense = Dense(units=num_classes)(dropout)
-        relu = Activation('relu', name='relu_x')(dense)
-        return relu
+        softmax = Activation('softmax', name='softmax_x')(dense)
+        return softmax
     return result
 
 def Inputs():
